@@ -18,14 +18,18 @@ body {
   font-family: "Manrope", sans-serif;
   background-color: aliceblue;
   font-weight: 400;
-  color: "#aaa";
   line-height: 1.6;
-  margin: 20px;
+  margin: 1.2rem;
 }
 
 section {
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  height: calc(100vh - 3rem);
+}
+
+.nav a.active {
+  background-color: "#242a2e";
 }
 
 @layer components {
