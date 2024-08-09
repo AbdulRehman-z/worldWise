@@ -12,9 +12,9 @@ function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3rem)] bg-colorDark-1 p-10">
+    <section className="bg-colorDark-1 p-10">
       <PageNav />
-      <div className="bg-colorLight-2 p-8 rounded-md shadow-md w-1/2 mx-auto mt-36 ">
+      <div className="bg-colorLight-2 p-8 rounded-md shadow-md md:w-1/2  mx-auto mt-36 ">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -56,7 +56,7 @@ function Login() {
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
 
