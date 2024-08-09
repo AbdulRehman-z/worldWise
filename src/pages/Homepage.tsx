@@ -3,7 +3,7 @@ import PageNav from "../components/PageNav";
 
 function Homepage() {
   return (
-    <section className=" min-h-[calc(100vh-3rem)] bg-[linear-gradient(rgba(36,42,46,0.8),rgba(36,42,46,0.8)),url('/bg.jpg')] bg-cover bg-center p-10">
+    <section className=" bg-[linear-gradient(rgba(36,42,46,0.8),rgba(36,42,46,0.8)),url('/bg.jpg')] bg-cover bg-center p-10">
       <PageNav />
       <main className="flex flex-col  items-center justify-center gap-5 text-center drop-shadow-md mt-28 ">
         <h1 className="text-white font-bold text-5xl leading-tight">
@@ -16,7 +16,7 @@ function Homepage() {
           of. Never forget your wonderful experiences, and show your friends how
           you have wandered the world.
         </h2>
-        <Link to="/" className="btn-primary uppercase mt-7">
+        <Link to="/app" className="btn-primary uppercase mt-7">
           Start Tracking now
         </Link>
       </main>
