@@ -5,7 +5,7 @@ const positionSchema = z.object({
   lng: z.number(),
 });
 
-const citySchema = z.object({
+export const citySchema = z.object({
   cityName: z.string(),
   country: z.string(),
   date: z.string().datetime(),
