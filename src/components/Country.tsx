@@ -1,12 +1,10 @@
-import { CitiesArrayType } from "../schema";
+import { useCitiesContext } from "../contexts/CitiesContext";
 import CountryItem from "./CountryItem";
 import Message from "./Message";
 
-type CountryProps = {
-  cities: CitiesArrayType;
-};
+function Country() {
+  const { cities } = useCitiesContext();
 
-function Country({ cities }: CountryProps) {
   if (cities.length === 0)
     return (
       <Message message="Select your first city by clicking on a city on the map." />
