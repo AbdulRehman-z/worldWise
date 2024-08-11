@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
 import { type CityType } from "../schema";
+import { useCitiesContext } from "../contexts/CitiesContext";
 
 type CityItemProps = {
   city: CityType;
 };
 
 function CityItem({ city }: CityItemProps) {
+  const { currentCity } = useCitiesContext();
+
   function formatDate(date: string) {
     return new Intl.DateTimeFormat("en", {
       day: "numeric",
@@ -14,7 +18,12 @@ function CityItem({ city }: CityItemProps) {
   }
 
   return (
-    <li className="py-2 my-3 first:mt-0 last:mb-0 hover:shadow-lg transition-all duration-100 ease-linear  cursor-pointer  text-sm flex items-center justify-between px-4 rounded-lg bg-colorDark-2 ">
+    <Link
+      to={`${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`}
+      className={`py-2 my-3 first:mt-0 last:mb-0 hover:shadow-lg transition-all duration-100 ease-linear  cursor-pointer  text-sm flex items-center justify-between px-4 rounded-lg bg-colorDark-2 
+        ${currentCity?.id === city.id ? "border-2 border-colorbrand-1" : ""}
+      `}
+    >
       <div className="flex gap-2">
         <p>{city.emoji}</p>
         <p>{city.cityName}</p>
@@ -25,7 +34,7 @@ function CityItem({ city }: CityItemProps) {
           &times;
         </button>
       </div>
-    </li>
+    </Link>
   );
 }
 
