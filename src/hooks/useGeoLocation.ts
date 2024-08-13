@@ -5,7 +5,7 @@ type Position = {
   lng: number;
 };
 
-export function useGeolocation() {
+export function useGeolocationHook() {
   const [isLoading, setIsLoading] = useState(false);
   const [position, setPosition] = useState<Position | null>(null);
   const [error, setError] = useState<string | null>(null);
