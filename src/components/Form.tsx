@@ -128,6 +128,7 @@ function Form() {
           Notes
         </label>
         <textarea
+          onChange={(e) => setNotes(e.target.value)}
           placeholder="Write your notes here"
           id="notes"
           className="shadow appearance-none  border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
