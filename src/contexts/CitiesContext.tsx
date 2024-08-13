@@ -12,6 +12,7 @@ import {
   citiesSchema,
   citySchema,
 } from "../schema";
+import { NewCityType } from "../components/Form";
 
 type CitiesContextProps = {
   children: ReactNode;
@@ -23,7 +24,10 @@ type City = CityType | null;
 type CitiesContext = {
   cities: Cities;
   isLoading: boolean;
-  getId: (id: string) => void;
+  getId: (id: string) => Promise<void>;
+  createCity: (city: NewCityType) => Promise<void>;
+  deleteCity: (id: number) => Promise<void>;
+
   currentCity: City;
 };
 
@@ -58,6 +62,43 @@ export default function CitiesContextProvider({
     fetchCities();
   }, []);
 
+  async function createCity(city: NewCityType) {
+    try {
+      setLoading(true);
+      const res = await fetch("http://localhost:3000/cities", {
+        method: "POST",
+        body: JSON.stringify(city),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setCities((cities) => [...cities, data]);
+    } catch (error) {
+      alert(`Error: ${error}`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteCity(id: number) {
+    try {
+      setLoading(true);
+      await fetch(`http://localhost:3000/cities/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setCities((cities) => cities.filter((city) => city.id !== id));
+    } catch (error) {
+      alert(`Error: ${error}`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function getId(id: string) {
     try {
       setLoading(true);
@@ -83,6 +124,8 @@ export default function CitiesContextProvider({
         isLoading,
         getId,
         currentCity,
+        createCity,
+        deleteCity,
       }}
     >
       {children}
