@@ -6,15 +6,20 @@ type CityItemProps = {
   city: CityType;
 };
 
-function CityItem({ city }: CityItemProps) {
-  const { currentCity } = useCitiesContext();
+export function formatDate(date: string) {
+  return new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
+}
 
-  function formatDate(date: string) {
-    return new Intl.DateTimeFormat("en", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }).format(new Date(date));
+function CityItem({ city }: CityItemProps) {
+  const { currentCity, deleteCity } = useCitiesContext();
+
+  async function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    await deleteCity(city.id);
   }
 
   return (
@@ -30,7 +35,10 @@ function CityItem({ city }: CityItemProps) {
       </div>
       <div className="flex gap-2 items-center">
         <p>{formatDate(city.date)}</p>
-        <button className="size-5 rounded-full bg-colorDark-1 text-colorLight-2 cursor-pointer hover:bg-colorbrand-1 transition-all duration-200 ease-linear">
+        <button
+          onClick={handleClick}
+          className="size-5 rounded-full bg-colorDark-1 text-colorLight-2 cursor-pointer hover:bg-colorbrand-1 transition-all duration-200 ease-linear"
+        >
           &times;
         </button>
       </div>
