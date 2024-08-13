@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   MapContainer,
   Marker,
@@ -9,21 +9,19 @@ import {
 } from "react-leaflet";
 import { useCitiesContext } from "../contexts/CitiesContext";
 import { useEffect, useState } from "react";
-import { useGeolocation } from "../hooks/useGeoLocation";
+import { useGeolocationHook } from "../hooks/useGeoLocation";
+import useGetParamsHook from "../hooks/useGetParams";
 
 function Map(): JSX.Element {
-  const [searchParams] = useSearchParams();
   const [mapPosition, setMapPosition] = useState({ lat: 40, lng: 0 });
   const {
     getPosition,
     isLoading: isGeoPositionLoading,
     position: geoLocationPosition,
-  } = useGeolocation();
+  } = useGeolocationHook();
 
   const { cities } = useCitiesContext();
-
-  const lat = Number(searchParams.get("lat"));
-  const lng = Number(searchParams.get("lng"));
+  const { lat, lng } = useGetParamsHook();
 
   useEffect(() => {
     if (lat && lng) {
@@ -43,9 +41,12 @@ function Map(): JSX.Element {
   }, [geoLocationPosition]);
 
   return (
-    <div className="h-full relative ">
+    <div className="h-full relative">
       {!geoLocationPosition && (
-        <button className="btn-primary" onClick={getPosition}>
+        <button
+          className="btn-primary absolute z-50 left-1/2 top-3/4 mt-32 -translate-x-1/2"
+          onClick={getPosition}
+        >
           {isGeoPositionLoading
             ? "Getting Your Position..."
             : "Use Your Position"}
@@ -53,7 +54,7 @@ function Map(): JSX.Element {
       )}
 
       <MapContainer
-        className="h-full bg-colorDark-2"
+        className="h-full bg-colorDark-2 relative z-10"
         center={mapPosition}
         zoom={13}
         scrollWheelZoom={true}
