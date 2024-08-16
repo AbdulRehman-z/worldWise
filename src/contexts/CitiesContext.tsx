@@ -2,6 +2,7 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -24,7 +25,7 @@ type City = CityType;
 type CitiesContext = {
   cities: Cities;
   isLoading: boolean;
-  getId: (id: string) => Promise<void>;
+  getCity: (id: string) => Promise<void>;
   createCity: (city: NewCityType) => Promise<void>;
   deleteCity: (id: number) => Promise<void>;
 
@@ -181,7 +182,7 @@ export default function CitiesContextProvider({
     }
   }
 
-  async function getId(id: string) {
+  const getCity = useCallback(async function getCity(id: string) {
     try {
       // setLoading(true);
       dispatch({ type: "loading" });
@@ -199,14 +200,14 @@ export default function CitiesContextProvider({
         payload: "error occured during fetching a city",
       });
     }
-  }
+  }, []);
 
   return (
     <CitiesContext.Provider
       value={{
         cities,
         isLoading,
-        getId,
+        getCity,
         currentCity,
         createCity,
         deleteCity,
