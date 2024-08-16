@@ -37,8 +37,6 @@ function Map(): JSX.Element {
         lng: geoLocationPosition.lng,
       });
     }
-
-    console.log(mapPosition);
   }, [geoLocationPosition]);
 
   return (
