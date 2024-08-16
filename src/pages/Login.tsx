@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const { login, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("jack@example.com");
+  const [password, setPassword] = useState("qwerty");
 
   useEffect(() => {
     if (isAuthenticated) navigate("/app");
