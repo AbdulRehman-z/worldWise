@@ -1,14 +1,22 @@
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import PageNav from "../components/PageNav";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const { login, isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (isAuthenticated) navigate("/app");
+  }, [isAuthenticated]);
+
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    console.log(email, password);
+    if (email && password) login(email, password);
   };
 
   return (
@@ -51,7 +59,7 @@ function Login() {
               required
             />
           </div>
-          <button type="submit" className="btn-primary">
+          <button onSubmit={handleSubmit} type="submit" className="btn-primary">
             Login
           </button>
         </form>
