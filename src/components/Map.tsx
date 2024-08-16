@@ -11,6 +11,7 @@ import { useCitiesContext } from "../contexts/CitiesContext";
 import { useEffect, useState } from "react";
 import { useGeolocationHook } from "../hooks/useGeoLocation";
 import useGetParamsHook from "../hooks/useGetParams";
+import User from "./User";
 
 function Map(): JSX.Element {
   const [mapPosition, setMapPosition] = useState({ lat: 40, lng: 0 });
@@ -42,6 +43,7 @@ function Map(): JSX.Element {
 
   return (
     <div className="h-full relative">
+      <User />
       {!geoLocationPosition && (
         <button
           className="btn-primary absolute z-50 left-1/2 top-3/4 mt-32 -translate-x-1/2"
