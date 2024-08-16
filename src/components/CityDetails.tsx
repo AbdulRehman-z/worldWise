@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 
 function CityDetails() {
   const { id } = useParams();
-  const { getId, currentCity, isLoading } = useCitiesContext();
+  const { getCity, currentCity, isLoading } = useCitiesContext();
   const navigate = useNavigate();
 
   function formateDate(date: string | undefined) {
@@ -19,8 +19,8 @@ function CityDetails() {
 
   useEffect(() => {
     if (!id) return;
-    getId(id);
-  }, [id]);
+    getCity(id);
+  }, [id, getCity]);
 
   if (isLoading) return <Spinner />;
   if (!currentCity) return <p>City not found</p>;
