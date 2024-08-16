@@ -16,7 +16,7 @@ function Homepage() {
           of. Never forget your wonderful experiences, and show your friends how
           you have wandered the world.
         </h2>
-        <Link to="/app" className="btn-primary uppercase mt-7">
+        <Link to="/login" className="btn-primary uppercase mt-7">
           Start Tracking now
         </Link>
       </main>
